@@ -5,13 +5,19 @@ import mongoose from "mongoose";
 import Book from "./models/Book.js";
 import userRoute from "./routes/users.js";
 
-dotenv.config();
+dotenv.config({ path: "./config/.env" });
 
 const app = express();
 
 // Middleware
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: ["https://book-client-sigma.vercel.app"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
 
 // Kết nối với MongoDB
 mongoose
